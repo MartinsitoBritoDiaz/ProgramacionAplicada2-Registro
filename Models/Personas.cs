@@ -19,6 +19,8 @@ namespace ProyectoPersonasBlazor.Models
         [StringLength(10,ErrorMessage ="Debe contener 10 digitos")]
         public string telefono { get; set; }
 
+
+        [Phone(ErrorMessage = "Solo debe introducir numeros")]
         [Required(ErrorMessage = "Es obligatorio introducir la cedula")]
         [StringLength(11, ErrorMessage = "Debe contener 11 digitos")]
         public string cedula { get; set; }

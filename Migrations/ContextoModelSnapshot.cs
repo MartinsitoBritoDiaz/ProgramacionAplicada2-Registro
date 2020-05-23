@@ -53,7 +53,7 @@ namespace ProyectoPersonasBlazor.Migrations
                             personaId = 1,
                             cedula = "40233030523",
                             direccion = "Nagua",
-                            fechaNacimiento = new DateTime(2020, 5, 23, 14, 51, 5, 123, DateTimeKind.Local).AddTicks(3185),
+                            fechaNacimiento = new DateTime(2020, 5, 23, 14, 55, 37, 734, DateTimeKind.Local).AddTicks(6602),
                             nombre = "Martinsito",
                             telefono = "8098010738"
                         });
