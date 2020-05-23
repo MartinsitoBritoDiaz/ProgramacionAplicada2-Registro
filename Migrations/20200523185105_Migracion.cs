@@ -27,7 +27,7 @@ namespace ProyectoPersonasBlazor.Migrations
             migrationBuilder.InsertData(
                 table: "Personas",
                 columns: new[] { "personaId", "cedula", "direccion", "fechaNacimiento", "nombre", "telefono" },
-                values: new object[] { 1, "40233030523", "Nagua", new DateTime(2020, 5, 22, 14, 55, 33, 412, DateTimeKind.Local).AddTicks(3811), "Martinsito", "8098010738" });
+                values: new object[] { 1, "40233030523", "Nagua", new DateTime(2020, 5, 23, 14, 51, 5, 123, DateTimeKind.Local).AddTicks(3185), "Martinsito", "8098010738" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

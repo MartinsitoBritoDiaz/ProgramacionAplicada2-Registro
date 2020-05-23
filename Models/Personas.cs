@@ -14,6 +14,7 @@ namespace ProyectoPersonasBlazor.Models
         [Required(ErrorMessage = "Es obligatorio introducir el nombre")]
         public string nombre { get; set; }
 
+        [Phone(ErrorMessage ="Solo debe introducir numeros")]
         [Required(ErrorMessage = "Es obligatorio introducir el telefono")]
         [StringLength(10,ErrorMessage ="Debe contener 10 digitos")]
         public string telefono { get; set; }
