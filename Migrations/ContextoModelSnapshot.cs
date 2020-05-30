@@ -22,6 +22,9 @@ namespace ProyectoPersonasBlazor.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<double>("balance")
+                        .HasColumnType("REAL");
+
                     b.Property<string>("cedula")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -51,12 +54,51 @@ namespace ProyectoPersonasBlazor.Migrations
                         new
                         {
                             personaId = 1,
+                            balance = 0.0,
                             cedula = "40233030523",
                             direccion = "Nagua",
-                            fechaNacimiento = new DateTime(2020, 5, 23, 17, 23, 11, 502, DateTimeKind.Local).AddTicks(1814),
+                            fechaNacimiento = new DateTime(2020, 5, 29, 15, 26, 20, 751, DateTimeKind.Local).AddTicks(5804),
                             nombre = "Martinsito",
                             telefono = "8098010738"
                         });
+                });
+
+            modelBuilder.Entity("ProyectoPersonasBlazor.Models.Prestamos", b =>
+                {
+                    b.Property<int>("prestamoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("balance")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("concepto")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("monto")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("personaId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("prestamoId");
+
+                    b.HasIndex("personaId");
+
+                    b.ToTable("Prestamos");
+                });
+
+            modelBuilder.Entity("ProyectoPersonasBlazor.Models.Prestamos", b =>
+                {
+                    b.HasOne("ProyectoPersonasBlazor.Models.Personas", "Persona")
+                        .WithMany()
+                        .HasForeignKey("personaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

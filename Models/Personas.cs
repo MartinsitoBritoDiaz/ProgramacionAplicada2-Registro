@@ -19,7 +19,6 @@ namespace ProyectoPersonasBlazor.Models
         [StringLength(10,ErrorMessage ="Debe contener 10 digitos", MinimumLength = 10)]
         public string telefono { get; set; }
 
-
         [Phone(ErrorMessage = "Solo debe introducir numeros")]
         [Required(ErrorMessage = "Es obligatorio introducir la cedula")]
         [StringLength(11, ErrorMessage = "Debe contener 11 digitos", MinimumLength = 11)]
@@ -27,6 +26,8 @@ namespace ProyectoPersonasBlazor.Models
 
         [Required(ErrorMessage = "Es obligatorio introducir la direccion")]
         public string direccion { get; set; }
+
+        public double balance { get; set; }
 
         [Required(ErrorMessage = "Es obligatorio introducir la fecha de nacimiento")]
         public DateTime fechaNacimiento { get; set; }

@@ -4,6 +4,7 @@ using ProyectoPersonasBlazor.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ProyectoPersonasBlazor.BLL
@@ -76,7 +77,6 @@ namespace ProyectoPersonasBlazor.BLL
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -135,6 +135,46 @@ namespace ProyectoPersonasBlazor.BLL
             }
 
             return paso;
+        }
+
+        public static List<Personas> GetList(Expression<Func<Personas, bool>> criterio)
+        {
+            List<Personas> listaPersonas = new List<Personas>();
+            Contexto contexto = new Contexto();
+
+            try
+            {
+                listaPersonas = contexto.Personas.Where(criterio).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+
+            return listaPersonas;
+        }
+
+        public static List<Personas> GetPersonas()
+        {
+            List<Personas> listaPersonas = new List<Personas>();
+            Contexto contexto = new Contexto();
+            try
+            {
+                listaPersonas = contexto.Personas.ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+            return listaPersonas;
         }
     }
 }

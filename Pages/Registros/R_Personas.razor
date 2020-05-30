@@ -37,9 +37,9 @@
                     <ValidationMessage For="@(() => Persona.nombre)" />
                 </div>
 
-                @*Telefono*@
+                @*Teléfono*@
                 <div class="form-group">
-                    <label>Telefono</label>
+                    <label>Teléfono</label>
                     <InputText @bind-Value="Persona.telefono" class="form-control" />
                     <ValidationMessage For="@(() => Persona.telefono)" />
                 </div>
@@ -53,9 +53,16 @@
 
                 @*Direccion*@
                 <div class="form-group">
-                    <label>Direccion</label>
+                    <label>Dirección</label>
                     <InputText @bind-Value="Persona.direccion" class="form-control" />
                     <ValidationMessage For="@(() => Persona.direccion)" />
+                </div>
+
+                @*Balance*@
+                <div class="form-group">
+                    <label>Balance</label>
+                    <InputNumber @bind-Value="Persona.balance" class="form-control" readonly />
+                    <ValidationMessage For="@(() => Persona.balance)" />
                 </div>
 
                 @*Fecha Nacimiento*@

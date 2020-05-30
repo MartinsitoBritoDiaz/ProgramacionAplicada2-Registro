@@ -17,6 +17,20 @@
     <Compile Remove="Migrations\20200523185105_Migracion.Designer.cs" />
     <Compile Remove="Migrations\20200523185538_Migracion.cs" />
     <Compile Remove="Migrations\20200523185538_Migracion.Designer.cs" />
+    <Compile Remove="Migrations\20200523212311_Migracion.cs" />
+    <Compile Remove="Migrations\20200523212311_Migracion.Designer.cs" />
+    <Compile Remove="Migrations\20200528232803_Migracion.cs" />
+    <Compile Remove="Migrations\20200528232803_Migracion.Designer.cs" />
+    <Compile Remove="Migrations\20200529061121_Migracion.cs" />
+    <Compile Remove="Migrations\20200529061121_Migracion.Designer.cs" />
+    <Compile Remove="Migrations\20200529185748_Migracion.cs" />
+    <Compile Remove="Migrations\20200529185748_Migracion.Designer.cs" />
+    <Compile Remove="Migrations\20200529192331_Migracion.cs" />
+    <Compile Remove="Migrations\20200529192331_Migracion.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Data\Persona.db-shm" />
   </ItemGroup>
 
   <ItemGroup>
