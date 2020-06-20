@@ -9,7 +9,7 @@ using ProyectoPersonasBlazor.DAL;
 namespace ProyectoPersonasBlazor.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200620024539_Migracion")]
+    [Migration("20200620043924_Migracion")]
     partial class Migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,7 @@ namespace ProyectoPersonasBlazor.Migrations
                         new
                         {
                             moraId = 1,
-                            fecha = new DateTime(2020, 6, 19, 22, 45, 38, 735, DateTimeKind.Local).AddTicks(4465),
+                            fecha = new DateTime(2020, 6, 20, 0, 39, 23, 860, DateTimeKind.Local).AddTicks(9762),
                             total = 1000.0
                         });
                 });
@@ -109,7 +109,7 @@ namespace ProyectoPersonasBlazor.Migrations
                             balance = 0.0,
                             cedula = "40233030523",
                             direccion = "Nagua",
-                            fechaNacimiento = new DateTime(2020, 6, 19, 22, 45, 38, 732, DateTimeKind.Local).AddTicks(8274),
+                            fechaNacimiento = new DateTime(2020, 6, 20, 0, 39, 23, 858, DateTimeKind.Local).AddTicks(3583),
                             nombre = "Martinsito",
                             telefono = "8098010738"
                         });

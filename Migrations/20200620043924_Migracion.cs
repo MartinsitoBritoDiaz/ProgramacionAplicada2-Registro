@@ -87,12 +87,12 @@ namespace ProyectoPersonasBlazor.Migrations
             migrationBuilder.InsertData(
                 table: "Moras",
                 columns: new[] { "moraId", "fecha", "total" },
-                values: new object[] { 1, new DateTime(2020, 6, 19, 22, 45, 38, 735, DateTimeKind.Local).AddTicks(4465), 1000.0 });
+                values: new object[] { 1, new DateTime(2020, 6, 20, 0, 39, 23, 860, DateTimeKind.Local).AddTicks(9762), 1000.0 });
 
             migrationBuilder.InsertData(
                 table: "Personas",
                 columns: new[] { "personaId", "balance", "cedula", "direccion", "fechaNacimiento", "nombre", "telefono" },
-                values: new object[] { 1, 0.0, "40233030523", "Nagua", new DateTime(2020, 6, 19, 22, 45, 38, 732, DateTimeKind.Local).AddTicks(8274), "Martinsito", "8098010738" });
+                values: new object[] { 1, 0.0, "40233030523", "Nagua", new DateTime(2020, 6, 20, 0, 39, 23, 858, DateTimeKind.Local).AddTicks(3583), "Martinsito", "8098010738" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_MorasDetalle_prestamoId",

@@ -15,7 +15,7 @@ namespace ProyectoPersonasBlazor.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source= DATA\Persona.db");
+            optionsBuilder.UseSqlite(@"Data Source= Data\Persona.db");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

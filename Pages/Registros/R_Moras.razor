@@ -1,0 +1,123 @@
+﻿@page "/Moras"
+@page "/Moras/{moraId:int}"
+
+@using BLL
+@using Models
+
+@inject IToastService toast
+
+<EditForm Model="Mora" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="card">
+        <div class="card-header text-lg-center">
+            <h3 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ">Registro de moras</h3>
+        </div>
+        <div class="card-body">
+            <form>
+
+                @*MoraId*@
+                <div class="form-row align-items-center">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>PersonaId</label>
+                            <div class="input-group">
+                                <InputNumber @bind-Value="Mora.moraId" class="form-control col-4" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary input-group-text" @onclick="Buscar">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*Fecha*@
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <InputDate @bind-Value="Mora.fecha" class="form-control" />
+                    <ValidationMessage For="@(() => Mora.fecha)" />
+                </div>
+
+
+                @*Total*@
+                <div class="form-group">
+                    <label>Total</label>
+                    <InputNumber @bind-Value="Mora.total" class="form-control"/>
+                    <ValidationMessage For="@(() => Mora.total)" />
+                </div>
+
+            </form>
+        </div>
+
+        <div class="card-footer">
+            <div class="form-group text-center" display: inline-block>
+                <button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo">Nuevo</button>
+                <button type="submit" class="btn btn-lg btn-success">Guardar</button>
+                <button type="button" class="btn btn-lg btn-danger" @onclick="Eliminar">Eliminar</button>
+            </div>
+        </div>
+
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int moraId { get; set; }
+
+    private Moras Mora = new Moras();
+
+    protected override void OnInitialized()
+    {
+        Nuevo();
+        Buscar();
+    }
+
+    public void Nuevo()
+    {
+        Mora = new Moras();
+    }
+
+    private void Buscar()
+    {
+        if (Mora.moraId > 0)
+        {
+            var encontrado = MorasBLL.Buscar(Mora.moraId);
+
+            if (encontrado != null)
+                this.Mora = encontrado;
+            else
+                toast.ShowWarning("No encontrado");
+        }
+    }
+
+    public void Guardar()
+    {
+        bool guardo = false;
+
+        guardo = MorasBLL.Guardar(Mora);
+
+        if (guardo)
+        {
+            Nuevo();
+            toast.ShowSuccess("Guardada correctamente");
+        }
+        else
+            toast.ShowError("No fue posible guardar");
+    }
+
+    public void Eliminar()
+    {
+        bool elimino = false;
+
+        elimino = MorasBLL.Eliminar(Mora.moraId);
+
+        if (elimino)
+        {
+            Nuevo();
+            toast.ShowSuccess("Eliminada correctamente");
+        }
+        else
+            toast.ShowError("No fue posible eliminar");
+    }
+
+}
