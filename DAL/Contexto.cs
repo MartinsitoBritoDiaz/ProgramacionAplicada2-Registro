@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿ using Microsoft.EntityFrameworkCore;
 using ProyectoPersonasBlazor.Models;
 using System;
 using System.Collections.Generic;
@@ -11,10 +11,11 @@ namespace ProyectoPersonasBlazor.DAL
     {
         public DbSet<Personas> Personas { get; set; }
         public DbSet<Prestamos> Prestamos { get; set; }
+        public DbSet<Moras> Moras { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source= C:\Base de datos\Persona.db");
+            optionsBuilder.UseSqlite(@"Data Source= DATA\Persona.db");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,13 @@ namespace ProyectoPersonasBlazor.DAL
                 cedula = "40233030523",
                 direccion = "Nagua",
                 fechaNacimiento = DateTime.Now
+            });
+
+            modelBuilder.Entity<Moras>().HasData(new Moras
+            {
+                moraId = 1,
+                fecha = DateTime.Now,
+                total = 1000
             });
         }
     }

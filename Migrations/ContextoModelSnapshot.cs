@@ -16,6 +16,56 @@ namespace ProyectoPersonasBlazor.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.4");
 
+            modelBuilder.Entity("ProyectoPersonasBlazor.Models.Moras", b =>
+                {
+                    b.Property<int>("moraId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("total")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("moraId");
+
+                    b.ToTable("Moras");
+
+                    b.HasData(
+                        new
+                        {
+                            moraId = 1,
+                            fecha = new DateTime(2020, 6, 19, 22, 45, 38, 735, DateTimeKind.Local).AddTicks(4465),
+                            total = 1000.0
+                        });
+                });
+
+            modelBuilder.Entity("ProyectoPersonasBlazor.Models.MorasDetalle", b =>
+                {
+                    b.Property<int>("morasDetalleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("moraId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("prestamoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("valor")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("morasDetalleId");
+
+                    b.HasIndex("prestamoId");
+
+                    b.ToTable("MorasDetalle");
+                });
+
             modelBuilder.Entity("ProyectoPersonasBlazor.Models.Personas", b =>
                 {
                     b.Property<int>("personaId")
@@ -57,7 +107,7 @@ namespace ProyectoPersonasBlazor.Migrations
                             balance = 0.0,
                             cedula = "40233030523",
                             direccion = "Nagua",
-                            fechaNacimiento = new DateTime(2020, 5, 29, 15, 26, 20, 751, DateTimeKind.Local).AddTicks(5804),
+                            fechaNacimiento = new DateTime(2020, 6, 19, 22, 45, 38, 732, DateTimeKind.Local).AddTicks(8274),
                             nombre = "Martinsito",
                             telefono = "8098010738"
                         });
@@ -90,6 +140,15 @@ namespace ProyectoPersonasBlazor.Migrations
                     b.HasIndex("personaId");
 
                     b.ToTable("Prestamos");
+                });
+
+            modelBuilder.Entity("ProyectoPersonasBlazor.Models.MorasDetalle", b =>
+                {
+                    b.HasOne("ProyectoPersonasBlazor.Models.Prestamos", null)
+                        .WithMany("MorasDetalle")
+                        .HasForeignKey("prestamoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProyectoPersonasBlazor.Models.Prestamos", b =>

@@ -24,8 +24,12 @@ namespace ProyectoPersonasBlazor.Models
         [Required(ErrorMessage = "Es obligatorio introducir el balance")]
         public double balance { get; set; }
         public int personaId { get; set; }
+        
         [ForeignKey("personaId")]
         public virtual Personas Persona { get; set; }
+
+        [ForeignKey("prestamoId")]
+        public virtual List<MorasDetalle> MorasDetalle { get; set; } = new List<MorasDetalle>();
 
     }
 }

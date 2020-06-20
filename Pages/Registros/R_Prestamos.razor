@@ -35,27 +35,12 @@
                 <div class="form-group">
                     <label>Personas</label>
                     <InputSelectNumber class="form-control" @bind-Value="Prestamo.personaId">
-                        @foreach(var auxiliar in LlenarCombo())
+                        @foreach (var auxiliar in LlenarCombo())
                         {
                             <option value="@auxiliar.personaId">@auxiliar.nombre</option>
                         }
                     </InputSelectNumber>
                 </div>
-
-                @*Monto*@
-                <div class="form-group">
-                    <label>Monto</label>
-                    <InputNumber @bind-Value="Prestamo.monto" class="form-control" />
-                    <ValidationMessage For="@(() => Prestamo.monto)" />
-                </div>
-
-                @*Balance*@
-                <div class="form-group">
-                    <label>Balance</label>
-                    <InputNumber @bind-Value="Prestamo.balance" class="form-control" readOnly/>
-                    <ValidationMessage For="@(() => Prestamo.balance)" />
-                </div>
-
                 @*Concepto*@
                 <div class="form-group">
                     <label>Concepto</label>
@@ -68,6 +53,69 @@
                     <label>Fecha</label>
                     <InputDate @bind-Value="Prestamo.fecha" class="form-control" />
                     <ValidationMessage For="@(() => Prestamo.fecha)" />
+                </div>
+
+                @*Detalle*@  
+                <div class="card">
+                    <div class="card-header text-md-center">
+                        <h4 style="font-family: 'Segoe UI', Tahoma,Verdana, Geneva, Tahoma, sans-serif" >Moras</h4>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label>Fecha</label>
+                            <InputDate @bind-Value="fechaMora" class="form-control" />
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label>Valor</label>
+                            <div class="input-group">
+                                <InputNumber @bind-Value="valor" class="form-control" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary input-group-text" @onclick="AgregarDetalle">
+                                        <i class="oi oi-plus" aria-hidden="true" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    @*Tabla del detalle*@
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var auxiliar in Prestamo.MorasDetalle)
+                            {
+                                <tr>
+                                    <td>@auxiliar.fecha</td>
+                                    <td>@auxiliar.valor</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                    
+                @*Monto*@
+                <div class="form-group">
+                    <label>Monto</label>
+                    <InputNumber @bind-Value="Prestamo.monto" class="form-control"/>
+                    <ValidationMessage For="@(() => Prestamo.monto)" />
+                </div>
+
+                @*Balance*@
+                <div class="form-group">
+                    <label>Balance</label>
+                    <InputNumber @bind-Value="Prestamo.balance" class="form-control" readOnly />
+                    <ValidationMessage For="@(() => Prestamo.balance)" />
                 </div>
             </form>
         </div>
@@ -87,6 +135,8 @@
 @code{ 
     [Parameter]
     public int PrestamoId { get; set; }
+    public double valor { get; set; }
+    public DateTime fechaMora { get; set; }
 
     private Prestamos Prestamo = new Prestamos();
 
@@ -112,7 +162,18 @@
 
         return listaPersonas;
     }
-    
+
+    private void AgregarDetalle()
+    {
+        Prestamo.MorasDetalle.Add(new MorasDetalle
+        {
+            moraId = 1,
+            fecha = fechaMora,
+            valor = valor,
+            prestamoId = Prestamo.prestamoId
+        });
+
+    }
 
     public void Nuevo()
     {

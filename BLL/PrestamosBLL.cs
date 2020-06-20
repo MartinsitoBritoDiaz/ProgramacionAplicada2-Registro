@@ -45,12 +45,19 @@ namespace ProyectoPersonasBlazor.BLL
 
         public static bool Insertar(Prestamos prestamo)
         {
+            double valor = 0;
             bool paso = false;
             Contexto contexto = new Contexto();
             
             try
             {
-                prestamo.balance = prestamo.monto;
+                foreach (var auxiliar in prestamo.MorasDetalle)
+                {
+                    valor += auxiliar.valor;
+                }
+
+                prestamo.balance = prestamo.monto + valor;
+
                 GuardarBalancePersona(prestamo);
                 contexto.Prestamos.Add(prestamo);
                 paso = (contexto.SaveChanges() > 0);
@@ -69,12 +76,26 @@ namespace ProyectoPersonasBlazor.BLL
 
         public static bool Modificar(Prestamos prestamo)
         {
+            double valor = 0 ;
             bool paso = false;
             Contexto contexto = new Contexto();
 
             try
             {
-                prestamo.balance = prestamo.monto;
+                contexto.Database.ExecuteSqlRaw($"Delete FROM MorasDetalle Where moraId = {prestamo.prestamoId}");
+
+                foreach (var auxiliar in prestamo.MorasDetalle)
+                {
+                    contexto.Entry(auxiliar).State = EntityState.Added;
+                }
+
+                foreach (var auxiliar in prestamo.MorasDetalle)
+                {
+                    valor += auxiliar.valor;
+                }
+
+                prestamo.balance = prestamo.monto + valor;
+
                 ModificarBalancePersona(prestamo);
                 contexto.Entry(prestamo).State = EntityState.Modified;
                 paso = (contexto.SaveChanges() > 0);
@@ -98,7 +119,10 @@ namespace ProyectoPersonasBlazor.BLL
 
             try
             {
-                prestamo = contexto.Prestamos.Find(id);
+                prestamo = contexto.Prestamos
+                    .Where(p => p.prestamoId == id)
+                    .Include(p => p.MorasDetalle)
+                    .FirstOrDefault();
             }
             catch (Exception)
             {
